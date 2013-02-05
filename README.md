@@ -10,8 +10,8 @@ Using the awesome tool that is [Vagrant](http://www.vagrantup.com/) and a sprink
 
 vagrant-roller has 3 main purposes:
 
-1. To provide a quick and easy means to test drive Roller - useful for people who are interested in trying Roller but don't want to go through the hassle of installing and configuring it manually.
-2. To provide an convenient and sandboxed way to author and test Roller themes. 
+1. To provide a quick and easy means to test drive Roller - useful for people who are interested in trying Roller but don't want to go through the process of installing and configuring it manually.
+2. To provide a convenient and sandboxed way to author and test Roller themes. 
 3. To provide some Puppet code with which a Roller install may be automated.
 
 ### How do I use it?
@@ -19,9 +19,20 @@ vagrant-roller has 3 main purposes:
 Getting your install up and running is dead easy and can be done in just a few minutes.
 
 * Install [Vagrant](http://www.vagrantup.com/)
-* Download the zipped vagrant-roller repo and unzip to a convenient location
+* Download the [zipped vagrant-roller repo](https://github.com/eddgrant/vagrant-roller/archive/master.zip) and unzip to a convenient location
 * Open a shell in the vagrant-roller folder and execute the command `vagrant up`
-* Wait... The complete install typically takes a few minutes (about 3-4 on my laptop) so now is the perfect time to go and make that brew you've been thinking about
+* Wait... The complete install typically takes approx 3 - 10 minutes to complete (this will depend somewhat on your internet connection) so now is the perfect time to go and make that brew you've been thinking about. Vagrant will keep you updated as it progresses, don't worry if it appears to stop for a few seconds here and there as it provisions the VM. 
+
+To give you an idea how easy this can be the process is shown below for Ubuntu (12.04 64 bit)
+
+    sudo apt-get install vagrant
+    wget https://github.com/eddgrant/vagrant-roller/archive/master.zip
+    unzip master.zip
+    cd vagrant-roller-master
+    vagrant up
+    # Wait until vagrant has started up and then go to http://www.localhost:8088/roller
+
+
 
 ### How do I access Roller?
 
@@ -44,7 +55,7 @@ Questions, issues and contributions welcome. Note however I can't do anything ab
 
 Enjoy!
 
-EdD
+Edd
 
 
 

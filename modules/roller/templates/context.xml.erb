@@ -1,15 +1,4 @@
 <Context docBase="../non-appBase-webapps/<%= @roller_context_path %>.war">
-  <!-- 
-    Example Tomcat Context Configuration file for Roller
-
-    If you'd like to use Tomcat provided datasource and mail sessions then:
-    - Set database.connetionType=jndi property in roller-custom.properties
-    - Set mail.connetionType=jndi property in roller-custom.properties
-    - Set the correct values for docBase, driverClassName, url, username, 
-      password and mail.smtp.host in the text below.
-    - Rename this file to context.xml and deploy Roller directory to Tomcat.
-  -->
-
   <!-- TODO: Replace all hardcoded properties as variables. -->
   <Resource name="jdbc/rollerdb" auth="Container" type="javax.sql.DataSource"
     driverClassName="com.mysql.jdbc.Driver"

@@ -27,8 +27,7 @@ class tomcat {
 
 define tomcat::deploy-exploded($path) {
  
-  class { 'tomcat' : }
-  #notice("Establishing http://$hostname:${tomcat::tomcat_port}/$name/")
+  include tomcat
  
   file { "/var/lib/tomcat6/webapps/${name}":
     ensure => 'directory',
@@ -44,9 +43,8 @@ define tomcat::deploy-exploded($path) {
 define tomcat::deploy-war($baseDir="/var/lib/tomcat6/webapps",
                           $warFile) {
  
-  class { 'tomcat' : }
-  #notice("Establishing http://$hostname:${tomcat::tomcat_port}/$name/")
- 
+  include tomcat
+  
   file { "$baseDir" :
     ensure => "directory",
     owner => "tomcat6",
@@ -59,7 +57,7 @@ define tomcat::deploy-war($baseDir="/var/lib/tomcat6/webapps",
     group => 'tomcat6',
     mode => '774',
     source => $warFile,
-    #notify => Service['tomcat6'],
+    notify => Service['tomcat6'],
     require => File["$baseDir"],
   }
 }
