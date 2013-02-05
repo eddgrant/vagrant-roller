@@ -19,7 +19,7 @@ vagrant-roller has 3 main purposes:
 Getting your install up and running is dead easy and can be done in just a few minutes.
 
 * Install [Vagrant](http://www.vagrantup.com/)
-* Download the zipped vagrant-roller repo and unzip to a convenient location
+* Download the [zipped vagrant-roller repo](https://github.com/eddgrant/vagrant-roller/archive/master.zip) and unzip to a convenient location
 * Open a shell in the vagrant-roller folder and execute the command `vagrant up`
 * Wait... The complete install typically takes a few minutes (about 3-4 on my laptop) so now is the perfect time to go and make that brew you've been thinking about
 
