@@ -2,7 +2,7 @@
 roller_version: "5.0.3"
 roller_base_data_dir: "/Data"
 
-roller_context_path: "roller"
+roller_context_path: "roller" #The leading '/' must be ommitted here.
 tomcat_libs: [ "activation.jar", "mail.jar", "mysql-connector-java.jar" ]
 roller_properties_files: ["planet-custom.properties", "roller-custom.properties"]
 
