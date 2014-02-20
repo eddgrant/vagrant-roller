@@ -1,0 +1,19 @@
+---
+roller_version: "5.0.3"
+roller_base_data_dir: "/Data"
+
+roller_context_path: "roller"
+tomcat_libs: [ "activation.jar", "mail.jar", "mysql-connector-java.jar" ]
+roller_properties_files: ["planet-custom.properties", "roller-custom.properties"]
+
+roller_db_host: localhost
+roller_db_port: 3306
+roller_db_name: rollerdb
+roller_db_user: roller
+roller_db_password: rollerpass
+
+smtp_host:
+smtp_port:
+smtp_user:
+smtp_password:
+smtp_sender:

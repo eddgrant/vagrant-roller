@@ -1,0 +1,12 @@
+#---------------------------------
+# Database configuration settings
+# Specify database configuration type of 'jndi' or 'jdbc'
+database.configurationType=jndi
+# For database configuration type 'jndi',this will be used
+database.jndi.name=java:comp/env/jdbc/rollerdb
+
+#----------------------------------
+# Planet Aggregator settings
+# Set to true to enable the Planet aggregator. You also need to enable the
+# Tell roller where to store the planet cache data.
+cache.dir={{ roller_base_data_dir }}/roller/planet_cache

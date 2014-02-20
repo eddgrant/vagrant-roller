@@ -1,0 +1,9 @@
+---
+
+- name: List the existing MySQL schemas
+  command: "/usr/bin/mysql -u{{ username }} -p{{ password }} -e \"show databases;\""
+  register: mysqlDatabases
+
+- name: Create a MySQL Schema
+  command: "/usr/bin/mysql -u{{ username }} -p{{ password }} -e \"create database {{ schema }};\""
+  when: mysqlDatabases.stdout.find(schema) == -1

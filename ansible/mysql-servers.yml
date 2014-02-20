@@ -1,0 +1,8 @@
+---
+- hosts: mysql-servers
+  sudo: yes
+  roles:
+  - mysql-server
+  - { role: mysql-schema, schema: rollerdb }
+  - { role: mysql-privilege, schema: rollerdb, privilegeUsername: roller, privilegePassword: rollerpass }
+

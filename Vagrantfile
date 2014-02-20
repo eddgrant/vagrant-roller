@@ -7,11 +7,14 @@ Vagrant::Config.run do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "lucid32"
+  #config.vm.box = "lucid32"
+  config.vm.box = "saucy64"
+  config.vm.host_name = "roller"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
+  #config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
+  config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box"
 
   # Boot with a GUI so you can see the screen. (Default is headless)
   # config.vm.boot_mode = :gui
@@ -58,11 +61,19 @@ Vagrant::Config.run do |config|
   # #               Managed by Puppet.\n"
   # # }
   #
-  config.vm.provision :puppet do |puppet|
-     puppet.manifests_path = "puppet/manifests"
-     puppet.manifest_file  = "puppet/default.pp"
-     puppet.options = "--verbose"
-     puppet.module_path = "modules"
+  #config.vm.provision :puppet do |puppet|
+  #   puppet.manifests_path = "puppet/manifests"
+  #   puppet.manifest_file  = "puppet/default.pp"
+  #   puppet.options = "--verbose"
+  #   puppet.module_path = "modules"
+  #end
+  
+  # Had to do this to get Ansible to work reliably over SSH: http://www.midwesternmac.com/blogs/jeff-geerling/fixing-ssh-unknown-error-when
+  config.vm.provision "ansible" do |ansible|
+    ansible.inventory_path = "ansible/vagrant.ini"
+    ansible.playbook = "ansible/site.yml"
+    #ansible.verbose = "v"
+    #ansible.raw_arguments = "--check"
   end
 
   # Enable provisioning with chef solo, specifying a cookbooks path (relative

@@ -1,0 +1,3 @@
+---
+- name: Install Apache Tomcat 7
+  apt: pkg=tomcat7 state=present

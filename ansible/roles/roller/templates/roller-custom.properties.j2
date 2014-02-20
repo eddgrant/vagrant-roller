@@ -1,0 +1,51 @@
+installation.type=auto
+database.configurationType=jndi
+database.jndi.name=java:comp/env/jdbc/rollerdb
+
+mail.configurationType=jndi
+mail.hostname={{ smtp_host }}
+mail.username={{ smtp_user }}
+mail.password={{ smtp_password }}
+mail.port={{ smtp_port }}
+mail.from={{ smtp_sender }}
+
+# Set a custom search index directoy.
+search.index.dir={{ roller_base_data_dir }}/roller/search-index
+
+# The directory in which Roller 4.0 uploaded files
+uploads.dir={{ roller_base_data_dir }}/roller/uploads
+
+{% if roller_version[0] == "5" %} 
+# The directory in which Roller 5.0 will upload files
+mediafiles.storage.dir={{ roller_base_data_dir }}/roller/mediafiles
+
+# Set to true to enable migration 
+uploads.migrate.auto=true
+{% endif %} 
+
+# Set a custom themes directory.
+themes.dir={{ roller_base_data_dir }}/roller/themes
+
+#-----------------------------------------------------------------------------
+# Log4j logging settings
+#-----------------------------------------------------------------------------
+log4j.rootCategory=INFO, roller
+log4j.appender.roller=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.roller.File=${catalina.base}/logs/roller.log
+log4j.appender.roller.layout=org.apache.log4j.PatternLayout
+log4j.appender.roller.layout.ConversionPattern=%-5p %d{yyyy-MM-dd HH:mm:ss,SSS} %C{1}:%M - %m%n
+# Options are: DEBUG, INFO, WARN, ERROR, FATAL
+# Roller code
+log4j.category.org.apache.roller=DEBUG
+log4j.category.net.java.roller=DEBUG
+# Roller dependent libraries
+log4j.category.org.hibernate=INFO
+log4j.category.org.apache.struts2=INFO
+# the struts2 file upload stuff has some overly verbose messaging
+log4j.category.org.apache.struts2.interceptor.FileUploadInterceptor=WARN
+log4j.category.org.springframework=WARN
+log4j.category.org.acegisecurity=ERROR
+# Velocity talks a lot, so by default it is set to STFU mode
+log4j.category.org.apache.velocity=FATAL
+# Roller extras
+log4j.category.com.ecyrd.jspwiki=ERROR

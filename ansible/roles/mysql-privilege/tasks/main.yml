@@ -1,0 +1,3 @@
+---
+- name: Apply privilege
+  shell: "/usr/bin/mysql -u{{ username }} -p{{ password }} -e \"grant all on {{ schema }}.* to {{ privilegeUsername }}@localhost identified by '{{ privilegePassword }}';\""

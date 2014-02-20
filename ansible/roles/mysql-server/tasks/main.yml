@@ -1,0 +1,15 @@
+---
+- name: Install MySQL Server
+  apt: pkg=mysql-server state=present
+  
+- name: Start the MySQL Server Service
+  service: name=mysql enabled=yes state=started
+  
+- name: Check whether the root user has had their password set in MySQL
+  shell: "mysqladmin -uroot -p{{ mysql_server_root_password }} status"
+  ignore_errors: true
+  register: mysqlRootUserCheck
+  
+- name: Set the MySQL Server root password
+  command: "mysqladmin -uroot password {{ mysql_server_root_password }}"
+  when: mysqlRootUserCheck.rc != 0

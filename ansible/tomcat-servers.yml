@@ -1,0 +1,6 @@
+---
+- hosts: tomcat-servers
+  sudo: yes
+  roles:
+  - tomcat-server
+  - roller

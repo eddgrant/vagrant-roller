@@ -1,0 +1,63 @@
+---
+- name: Create Roller directories
+  file: path={{ item }} state=directory owner=tomcat7 group=tomcat7
+  with_items: [ "{{ roller_base_data_dir }}",
+                "{{ roller_base_data_dir }}/roller",
+                "{{ roller_base_data_dir }}/roller/config",
+                "{{ roller_base_data_dir }}/roller/tomcat-lib",
+                "{{ roller_base_data_dir }}/roller/planet_cache",
+                "{{ roller_base_data_dir }}/roller/search-index",
+                "{{ roller_base_data_dir }}/roller/uploads",
+                "{{ roller_base_data_dir }}/roller/mediafiles",
+                "/var/lib/tomcat7/non-appBase-webapps" ]
+                
+- name: Create Roller Themes
+  copy: src=themes dest="{{ roller_base_data_dir }}/roller/" owner=tomcat7 group=tomcat7
+  notify:
+  - restart tomcat  
+  
+#- name: Create planet-custom.properties
+#  template: src="planet-custom.properties.j2" dest="{{ roller_base_data_dir }}/roller/config/planet-custom.properties" owner=tomcat7 group=tomcat7 mode=750
+#  notify:
+#  - restart tomcat  
+  
+- name: Create roller-custom.properties
+  template: src="roller-custom.properties.j2" dest="{{ roller_base_data_dir }}/roller/config/roller-custom.properties" owner=tomcat7 group=tomcat7 mode=750
+  notify:
+  - restart tomcat  
+  
+- name: Copy Tomcat libs
+  copy: src=tomcat-lib/{{ item }} dest="{{ roller_base_data_dir }}/roller/tomcat-lib" owner=tomcat7 group=tomcat7
+  with_items: tomcat_libs
+  notify:
+  - restart tomcat  
+  
+- name: Create Symlinks to property files (puts them on the Tomcat classpath)
+  file: src={{ roller_base_data_dir }}/roller/config/{{ item }} path="/usr/share/tomcat7/lib/{{ item}}" state=link
+  with_items: roller_properties_files
+  notify:
+  - restart tomcat  
+  
+- name: Create Symlinks to jars (puts them on the Tomcat classpath)
+  file: src={{ roller_base_data_dir }}/roller/tomcat-lib/{{ item }} path="/usr/share/tomcat7/lib/{{ item }}" state=link
+  with_items: tomcat_libs
+  notify:
+  - restart tomcat  
+  
+- name: Create Tomcat Context file 
+  template: src="context.xml.j2" dest="/var/lib/tomcat7/conf/Catalina/localhost/{{ roller_context_path }}.xml" owner=tomcat7 group=tomcat7 mode=750
+  notify:
+  - restart tomcat  
+  
+- name: Deploy the Roller war file
+  copy: src="roller-app-{{ roller_version }}.war" dest="/var/lib/tomcat7/non-appBase-webapps/{{ roller_context_path }}.war" owner=tomcat7 group=tomcat7 mode=770
+  notify:
+  - restart tomcat  
+  
+- name: Start Tomcat
+  service: name=tomcat7 enabled=yes state=started
+  
+  #TODO Put in notifications to restart TOmcat on file and war changes.
+  
+  
+
